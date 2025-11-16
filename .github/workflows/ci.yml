@@ -16,6 +16,7 @@ jobs:
           pip install -r requirements.txt
 
   test:
+      test:
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -28,7 +29,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run tests
-        run: pytest -v
+        run: |
+          export PYTHONPATH=.
+          pytest -v
+
 
   coverage:
     needs: test
